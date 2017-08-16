@@ -1,0 +1,16 @@
+<div class="content">        
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h2>users list</h2>
+        </div>
+    </div>    
+    <div class="row" *ngFor="let user of userList; let i = index" (click)="goToUser(user.id);" >
+            <div class="col-md-3 text-center">
+                    {{user.name}}
+            </div>
+            <div class="col-md-9 text-center">
+                    {{user.email}}
+            </div>
+    </div>    
+</div>
+      

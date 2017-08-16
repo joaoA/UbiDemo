@@ -1,0 +1,38 @@
+<div class="content">        
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h2>add users</h2>
+        </div>
+    </div>    
+    <div>
+        <form (ngSubmit)="onSubmit()" [formGroup]="userForm">
+            <div id="bottomSpace" class="row">
+                <div class="col-md-4">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" required placeholder="Name" formControlName="name">
+                    <div [hidden]="userForm.controls.name.valid || userForm.controls.name.pristine" class="error">
+                        Name is required.
+                    </div>
+                </div>
+            </div>
+            <div id="bottomSpace" class="row">
+                <div class="col-md-4">
+                    <label for="name">Email</label>
+                    <input type="text" class="form-control" id="email" required placeholder="Email" formControlName="email">
+                    <div [hidden]="userForm.controls.email.valid || userForm.controls.email.pristine" class="error">
+                        Email is required.
+                    </div>
+                </div>
+            </div>
+            <div class="formFooter">
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-success" [disabled]="userForm.invalid"><i class="fa fa-floppy-o"></i> Save</button>
+                        <button type="button" class="btn btn-danger" (click)="goToUsers()"><i class="fa fa-ban"></i> Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+          

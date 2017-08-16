@@ -1,0 +1,25 @@
+
+<div class="content">        
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h2>musics list</h2>
+        </div>
+    </div> 
+    <div class="row" >
+            <div class="col-md-3 text-center">
+                    Name
+            </div>
+            <div class="col-md-9 text-center">
+                    listenUrl
+            </div>
+    </div>  
+    <div class="row" *ngFor="let music of musicList; let i = index" (click)="goToMusic(music.id);" >
+            <div class="col-md-3 text-center">
+                    {{music.name}}
+            </div>
+            <div class="col-md-9 text-center">
+                    {{music.listenUrl}}
+            </div>
+    </div>       
+</div>
+        
