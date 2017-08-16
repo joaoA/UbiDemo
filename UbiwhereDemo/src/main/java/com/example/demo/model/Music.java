@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 public class Music {
 	@Id
@@ -25,8 +27,9 @@ public class Music {
 	@ManyToOne
 	@JoinColumn(name = "albumId")
 	private Album album;
-	
+		
 	@ManyToMany
+	@JsonBackReference
 	private List<Person> users;
 
 	public long getId() {
