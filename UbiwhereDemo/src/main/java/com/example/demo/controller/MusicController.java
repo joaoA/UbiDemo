@@ -6,10 +6,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.example.demo.model.Music;
 import com.example.demo.service.MusicService;
 
@@ -23,17 +24,49 @@ public class MusicController {
 	private MusicService musicService;
     
 	@RequestMapping(method=RequestMethod.GET)
-	public List<Music> getMusics() {
+	public List<Music> getMusics(@RequestParam(value = "userid", required=false) Long id) {
 		log.debug("[MusicController] getUsers");
-		
-		return musicService.findAll();
+			
+		if(id == null) 
+			return musicService.findAll();		
+		else 
+			return musicService.findAllByUserId(id);
+
 	}
 	
-	@RequestMapping(value="/users/{id}", method=RequestMethod.GET)
-	public List<Music> getMusicsByUser(@PathVariable("id") long id) {
-		log.debug("[MusicController] getUsers");
+	@RequestMapping(value="/{id}", method=RequestMethod.GET)
+	public Music getUserById(@PathVariable("id") Long id) {
+		log.debug("[MusicController] getUserById");
 		
-		return musicService.findAllByUserId(id);
+		return musicService.findById(id);
+	}
+		
+	@RequestMapping(method=RequestMethod.POST)
+	public long addUser(@RequestBody Music p) {
+		log.debug("[MusicController] addUser");
+		if (musicService.save(p)!=null)
+			return p.getId();
+		
+		return -1;
 	}
 	
+		
+	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
+	public long editUserById(@PathVariable("id") Long id, @RequestBody Music p) {
+		log.debug("[MusicController] editUserById");
+		
+		if (musicService.update(p)!=null)
+			return p.getId();		
+		return -1;
+	}
+	
+	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
+	public String deleteUserById(@PathVariable("id") Long id) {
+		log.debug("[MusicController] deleteUserById");
+		
+		musicService.deleteById(id);			
+		return "done";
+	}
+	
+
 }
