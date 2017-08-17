@@ -1,7 +1,7 @@
 # UbiDemo
 
 
-#### Download and Run
+## Download and Run
 ---
 
 git clone https://github.com/joaoA/UbiDemo.git
@@ -21,7 +21,7 @@ mvn spring-boot:run
 
 
 
-#### Project Info
+## Project Info
 ---
 
 UbiFrontEnd  => Angular 4 + bootstrap
