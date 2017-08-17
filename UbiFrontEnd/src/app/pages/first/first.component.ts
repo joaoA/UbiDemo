@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 
 @Component({
   selector: 'getting-started',
+  styleUrls: ['./first.component.css'],
   templateUrl: './first.component.html'
 })
 export class GettingStartedComponent {

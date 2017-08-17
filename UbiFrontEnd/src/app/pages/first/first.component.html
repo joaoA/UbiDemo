@@ -1,9 +1,17 @@
 <div class="content">        
     <div class="row">
         <div class="col-md-12 text-center">
-            <h2>Let's start</h2>
-            <button type="button" (click)="goToUsers()" class="btn btn-outline-success">Users</button>
-            <button type="button" (click)="goToMusics()" class="btn btn-outline-success">Musics</button>
+            <div id="bottomSpace">
+                    <h2 id="green">Welcome</h2>
+            </div>            
+            <div class="row">
+                <div class="col-md-6 text-center">
+                    <button style="width:100%" type="button" (click)="goToUsers()" class="btn btn-outline-success">User List</button>
+                </div>        
+                <div class="col-md-6 text-center">
+                    <button style="width:100%" type="button" (click)="goToMusics()" class="btn btn-outline-success">Music List</button>
+                </div>        
+            </div>        
         </div>
     </div>    
 </div>
