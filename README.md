@@ -1,7 +1,7 @@
 # UbiDemo
 
 
-#### download and runnig info
+#### Download and Run
 ---
 
 git clone https://github.com/joaoA/UbiDemo.git
