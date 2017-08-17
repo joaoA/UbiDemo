@@ -22,7 +22,7 @@ public class Person {
 	private String email;
 	
 	
-	@ManyToMany(cascade= CascadeType.ALL)
+	@ManyToMany(cascade= CascadeType.MERGE)
 	private List<Music> favoriteMusics;
 
 	public Person() {}

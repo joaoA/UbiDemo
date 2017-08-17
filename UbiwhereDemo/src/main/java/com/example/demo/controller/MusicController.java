@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.model.Music;
+import com.example.demo.model.Person;
 import com.example.demo.service.MusicService;
+import com.example.demo.service.PersonService;
 
 @RestController
 @RequestMapping("/api/musics")
@@ -22,6 +24,9 @@ public class MusicController {
 
 	@Autowired
 	private MusicService musicService;
+	
+	@Autowired
+	private PersonService personService;
     
 	@RequestMapping(method=RequestMethod.GET)
 	public List<Music> getMusics(@RequestParam(value = "userid", required=false) Long id) {
@@ -64,6 +69,20 @@ public class MusicController {
 	public String deleteUserById(@PathVariable("id") Long id) {
 		log.debug("[MusicController] deleteUserById");
 		
+		Music m =  musicService.findById(id);
+		if (m!= null) {
+			log.error("*************** user "+ personService.findAllByPersonId(m.getId()) +" updated ***********");
+			
+			personService.findAllByPersonId(m.getId()).forEach(user -> {
+				Person aux = personService.findById(user.getId());
+				List<Music> fav = aux.getFavoriteMusics();
+				log.error("*************** user fav musics "+ fav+" ***********");
+				fav.remove(m);
+				aux.setFavoriteMusics(fav);
+				personService.update(aux);
+				log.error("*************** user "+aux.getId() +" updated ***********");
+			});
+		}
 		musicService.deleteById(id);			
 		return "done";
 	}

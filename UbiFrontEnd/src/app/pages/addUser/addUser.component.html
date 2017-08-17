@@ -27,8 +27,14 @@
 
             <div id="bottomSpace" class="row">
                 <div class="col-md-4">
-                    <label for="name">favMusics</label>
-                    <ss-multiselect-dropdown [options]="myOptions" formControlName="optionsModel"></ss-multiselect-dropdown>                    
+                    <div class="row">
+                        <div class="col-md-12">
+                                <label for="name">favMusics</label>
+                        </div>          
+                        <div class="col-md-12">
+                                <ss-multiselect-dropdown [options]="myOptions" formControlName="optionsModel"></ss-multiselect-dropdown>                            
+                        </div>          
+                    </div>                              
                 </div>
             </div>
     

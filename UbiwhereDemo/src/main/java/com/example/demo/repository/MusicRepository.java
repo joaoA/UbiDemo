@@ -10,6 +10,7 @@ public interface MusicRepository extends CrudRepository<Music, Long> {
 	
 	@Query("Select m from Music m  left join m.users as u where u.id = ?1")
 	List<Music> findAllByUserId(long userId);
+	
 }
 
 

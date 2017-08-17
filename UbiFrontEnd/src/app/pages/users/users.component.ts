@@ -18,15 +18,28 @@ export class UsersComponent implements OnInit {
 
 
     ngOnInit(): void {
-        this.rs.getAll("/users").subscribe(
-            (users) => {
-                for (let a of users){
-                    this.userList.push(new Person(a))
-                }
-          }, error => { console.log(error); });
+        this.getAllUsers();
     }
 
     goToUser(i){
         this.router.navigate(["users",i]);
+    }
+
+    deleteUser(id){
+        this.rs.delete("/users/"+id).subscribe(
+            (done) => {
+                this.getAllUsers();             
+          }, error => { console.log(error); });
+    }
+
+
+    getAllUsers(){
+        this.rs.getAll("/users").subscribe(
+            (users) => {
+                this.userList=[];
+                for (let a of users){
+                    this.userList.push(new Person(a))
+                }
+          }, error => { console.log(error); });
     }
 }

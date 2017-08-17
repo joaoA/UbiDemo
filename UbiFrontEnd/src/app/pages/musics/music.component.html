@@ -1,28 +1,29 @@
 
 <div class="content">        
-    <div class="row">
-        <div class="col-md-12 text-center">
-            <h2>musics list</h2>
-        </div>
-    </div> 
-    <div class="row" >
-            <div class="col-md-3 text-center">
-                    Name
-            </div>
-            <div class="col-md-7 text-center">
-                    listenUrl
-            </div>
-    </div>  
-    <div class="row" *ngFor="let music of musicList; let i = index" (click)="goToMusic(music.id);" >
-            <div class="col-md-3 text-center">
-                    {{music.name}}
-            </div>
-            <div class="col-md-7 text-center">
-                    {{music.listenUrl}}
-            </div>
-            <div class="col-md-2 text-center" (click)="deleteMusic(music.id);">
-                delete
-            </div>  
-    </div>       
+        <div class="row">
+                <div class="col-md-12 text-center">
+                <h2>Music List</h2>
+                </div>
+        </div> 
+    
+        <table class="table table-striped">
+                <thead>
+                        <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Listen Url </th>
+                        <th></th>
+                        </tr>
+                </thead>
+                <tbody>
+                        <tr *ngFor="let music of musicList; let i = index" >
+                        <th scope="row" (click)="goToMusic(music.id);">{{music.id}}</th>
+                        <td (click)="goToMusic(music.id);">{{music.name}}</td>
+                        <td (click)="goToMusic(music.id);">{{music.listenUrl}}</td>
+                        <td (click)="deleteMusic(music.id);" >delete</td>
+                        </tr>
+                        
+                </tbody>
+        </table>
 </div>
         

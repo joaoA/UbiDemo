@@ -38,7 +38,7 @@ public class Music {
 	@JoinColumn(name = "albumId")
 	private Album album;
 		
-	@ManyToMany(cascade= CascadeType.ALL)
+	@ManyToMany(cascade= CascadeType.MERGE)
 	@JsonBackReference
 	private List<Person> users;
 

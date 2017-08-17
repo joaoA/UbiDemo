@@ -17,12 +17,7 @@ export class MusicsComponent implements OnInit {
     constructor(private rs: RestService,private router: Router){}
 
     ngOnInit(): void {
-        this.rs.getAll("/musics").subscribe(
-            (musics) => {
-                for (let a of musics){
-                    this.musicList.push(new Music(a))
-                }
-          }, error => { console.log(error); });
+       this.getAllMusics();
     }
 
     goToMusic(i){
@@ -34,6 +29,17 @@ export class MusicsComponent implements OnInit {
         this.rs.delete("/musics/"+id).subscribe(
             (done) => {
                 console.log("apagou");                
+                this.getAllMusics();
+          }, error => { console.log(error); });
+    }
+
+    getAllMusics(){
+        this.rs.getAll("/musics").subscribe(
+            (musics) => {
+                this.musicList=[];
+                for (let a of musics){
+                    this.musicList.push(new Music(a))
+                }
           }, error => { console.log(error); });
     }
 }

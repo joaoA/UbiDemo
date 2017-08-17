@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.example.demo.model.Music;
 import com.example.demo.model.Person;
 import com.example.demo.repository.PersonRepository;
 
@@ -19,6 +20,11 @@ public class PersonService {
 	    personRepo.findAll().forEach(rs::add);
 		return rs;
 	}
+	
+	public List<Person> findAllByPersonId(long musicId){
+		return personRepo.findAllByMusicId(musicId);
+	}
+	
 	
 	public Person findById(long id){
 		return personRepo.findOne(id);

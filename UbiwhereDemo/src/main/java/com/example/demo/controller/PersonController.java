@@ -40,8 +40,14 @@ public class PersonController {
 	}
 		
 	@RequestMapping(method=RequestMethod.POST)
-	public long addUser(@RequestBody Person p) {
+	public long addUser(@RequestBody Person p) throws JsonProcessingException {
 		log.debug("[PersonController] addUser");
+		
+		log.error("******************************");
+		log.error(new ObjectMapper().writeValueAsString(p));
+		log.error("******************************");
+		
+		
 		if (personService.save(p)!=null)
 			return p.getId();
 		

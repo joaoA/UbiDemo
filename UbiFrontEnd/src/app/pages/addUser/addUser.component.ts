@@ -72,8 +72,8 @@ export class AddUserComponent implements OnInit {
     * create or edit user
     */    
     addUser(user: Person){
-        // console.log("creating new user");
-        // console.log("user >>> " + JSON.stringify(user));
+        console.log("creating new user");
+        console.log("user >>> " + JSON.stringify(user));
 
         let url:string='';
         if (user.id){
@@ -116,8 +116,8 @@ export class AddUserComponent implements OnInit {
                     user.favoriteMusics.push(list[0]);
             }
         }
-        // console.log("this.userForm.value.optionsModel >> " + JSON.stringify(this.userForm.value.optionsModel))
-        // console.log("user >> " + JSON.stringify(user))
+        console.log("this.userForm.value.optionsModel >> " + JSON.stringify(this.userForm.value.optionsModel))
+        console.log("user >> " + JSON.stringify(user))
 
         this.addUser(user);
     }
