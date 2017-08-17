@@ -6,7 +6,7 @@ export class Person{
     public  id: number; 	
     public name: string;
     public email: string;
-    public favMusics:Array<Music>
+    public favoriteMusics:Array<Music>
 
     public constructor(data: any = {}){      
         if (data.id){
@@ -14,7 +14,7 @@ export class Person{
         }  
         this.name = data.name || '';
         this.email = data.email || '';
-        this.favMusics = data.favMusics;
+        this.favoriteMusics = data.favMusics;
     }
 
 }

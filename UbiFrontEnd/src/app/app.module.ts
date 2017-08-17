@@ -17,7 +17,7 @@ import { AppFooterComponent } from './common/app-footer/app-footer.component';
 import { HttpModule} from '@angular/http';
 import { Configuration } from './app.constants';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { MultiselectDropdownModule } from 'angular-2-dropdown-multiselect';
 
 let pages = [
   GettingStartedComponent,
@@ -45,7 +45,8 @@ let services = [
     routing,
     HttpModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MultiselectDropdownModule
   ],
   providers: [...services,Configuration],
   bootstrap: [AppComponent]

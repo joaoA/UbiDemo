@@ -1,8 +1,41 @@
 <div class="content">        
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <h2>add Musics</h2>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h2>add Musics</h2>
+        </div>
+    </div>    
+    <div>
+        <form (ngSubmit)="onSubmit()" [formGroup]="musicForm">
+            <div id="bottomSpace" class="row">
+                <div class="col-md-4">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" required placeholder="Name" formControlName="name">
+                    <div [hidden]="musicForm.controls.name.valid || musicForm.controls.name.pristine" class="error">
+                        Name is required.
+                    </div>
+                </div>
             </div>
-        </div>    
+            <div id="bottomSpace" class="row">
+                <div class="col-md-4">
+                    <label for="name">Download Url</label>
+                    <input type="text" class="form-control" id="downloadUrl"  placeholder="Download Url" formControlName="downloadUrl">                    
+                </div>
+            </div>
+            <div id="bottomSpace" class="row">
+                <div class="col-md-4">
+                    <label for="name">Listen Url</label>
+                    <input type="text" class="form-control" id="listenUrl"  placeholder="Listen Url" formControlName="listenUrl">                    
+                </div>
+            </div>
+            <div class="formFooter">
+                <div class="row">
+                    <div class="col-md-12">
+                        <button type="submit" class="btn btn-success" [disabled]="musicForm.invalid"><i class="fa fa-floppy-o"></i> Save</button>
+                        <button type="button" class="btn btn-danger" (click)="goToMusics()"><i class="fa fa-ban"></i> Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </form>
     </div>
+</div>
           

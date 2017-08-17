@@ -7,6 +7,9 @@ export class Music {
     // public album:Album;
     
     public constructor(data: any = {}){
+        if (data.id){
+            this.id = data.id;
+        } 
         this.name = data.name || '';
         this.downloadUrl = data.downloadUrl || '';
         this.listenUrl = data.listenUrl || '';

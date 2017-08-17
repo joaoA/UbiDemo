@@ -28,11 +28,18 @@ public class Person {
 	public Person(String name, String email, List<Music> musics) {
 		this.name = name;
 		this.email = email;
+		
 		if (musics==null) {
 			this.favoriteMusics = new ArrayList<Music>();
 		}else {
+			System.out.println("musics >> " +  musics.size() );
+			for (Music m:musics)
+				System.out.println("music.id >> " +  m.getId() );	
+			
 			this.favoriteMusics = musics;
 		}
+		
+		System.out.println("favoriteMusics >> " +  this.favoriteMusics.size() );
 	}
 	
 	

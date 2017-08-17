@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.model.Person;
 import com.example.demo.service.PersonService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,8 +49,12 @@ public class PersonController {
 	}
 	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public long editUserById(@PathVariable("id") Long id, @RequestBody Person p) {
+	public long editUserById(@PathVariable("id") Long id, @RequestBody Person p) throws JsonProcessingException {
 		log.debug("[PersonController] editUserById");
+		
+		log.error("******************************");
+		log.error(new ObjectMapper().writeValueAsString(p));
+		log.error("******************************");
 		
 		if (personService.update(p)!=null)
 			return p.getId();		

@@ -14,10 +14,7 @@ export class MusicsComponent implements OnInit {
     
     musicList:Array<Music>=[];
 
-    constructor(private rs: RestService,private router: Router){
-
-    }
-
+    constructor(private rs: RestService,private router: Router){}
 
     ngOnInit(): void {
         this.rs.getAll("/musics").subscribe(
@@ -29,7 +26,7 @@ export class MusicsComponent implements OnInit {
     }
 
     goToMusic(i){
-        this.router.navigate(["users",i]);
+        this.router.navigate(["musics",i]);
     }
 
 }

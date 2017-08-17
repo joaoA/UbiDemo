@@ -4,6 +4,10 @@ import { RestService } from "../../services/rest.service";
 import { FormGroup, Validators, FormControl } from "@angular/forms";
 import { Person } from '../../models/person'
 import { Router, ActivatedRoute } from "@angular/router";
+import { IMultiSelectOption } from 'angular-2-dropdown-multiselect';
+import { Music } from "../../models/music";
+
+
 
 @Component({
     selector: 'app-AddUser',
@@ -14,12 +18,23 @@ export class AddUserComponent implements OnInit {
 
     userForm;
     userId:number;
+    musics: Array<Music>=[];
+    optionsModel: number[]=[];    
+    myOptions: IMultiSelectOption[];
 
     constructor(private rs: RestService,private router: Router,private route: ActivatedRoute){}
 
-    ngOnInit(): void {
-        // throw new Error("Method not implemented.");
-
+    ngOnInit(): void {        
+        this.rs.getAll("/musics").subscribe(
+            (musics) => {
+                this.myOptions=[];
+                for (let a of musics){                    
+                    this.musics.push(new Music(a))
+                    this.myOptions.push({ id: parseInt(a.id), name: a.name });
+                    // this.optionsModel.push(a.id);
+                }                
+        }, error => { console.log(error); });
+        
         this.route.params.subscribe(params => {
             this.userId = params['id'];
             //set current position
@@ -35,8 +50,10 @@ export class AddUserComponent implements OnInit {
 
         this.userForm = new FormGroup({
             name: new FormControl('', Validators.required),
-            email: new FormControl('', Validators.required)            
+            email: new FormControl('', Validators.required),
+            optionsModel:new FormControl()
           });
+
     }
 
     /*
@@ -45,8 +62,10 @@ export class AddUserComponent implements OnInit {
     populateForm(user: Person){
         this.userForm.patchValue({
             name: user.name,
-            email: user.email
+            email: user.email,
+            optionsModel: user.favoriteMusics.map(({ id }) => id)
         });
+        
     }
 
     /*
@@ -74,7 +93,7 @@ export class AddUserComponent implements OnInit {
     }
 
     goToUsers(){
-        console.log("go to /users");
+        // console.log("go to /users");
         this.router.navigate(["users"]);
     }
 
@@ -89,7 +108,18 @@ export class AddUserComponent implements OnInit {
         if (this.userId)
           user.id = this.userId;
 
+        if(this.userForm.value.optionsModel != null && this.userForm.value.optionsModel.length > 0){
+            user.favoriteMusics = [];
+            for(let m of this.userForm.value.optionsModel){          
+                var list:Music[] = this.musics.filter((item) => item.id == m);
+                if(list!=null)
+                    user.favoriteMusics.push(list[0]);
+            }
+        }
+        // console.log("this.userForm.value.optionsModel >> " + JSON.stringify(this.userForm.value.optionsModel))
+        // console.log("user >> " + JSON.stringify(user))
+
         this.addUser(user);
-      }
+    }
 
 }
