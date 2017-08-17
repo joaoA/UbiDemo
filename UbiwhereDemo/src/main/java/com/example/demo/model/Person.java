@@ -3,6 +3,7 @@ package com.example.demo.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,7 +21,8 @@ public class Person {
 	
 	private String email;
 	
-	@ManyToMany
+	
+	@ManyToMany(cascade= CascadeType.ALL)
 	private List<Music> favoriteMusics;
 
 	public Person() {}
@@ -31,15 +33,10 @@ public class Person {
 		
 		if (musics==null) {
 			this.favoriteMusics = new ArrayList<Music>();
-		}else {
-			System.out.println("musics >> " +  musics.size() );
-			for (Music m:musics)
-				System.out.println("music.id >> " +  m.getId() );	
-			
+		}else {					
 			this.favoriteMusics = musics;
 		}
-		
-		System.out.println("favoriteMusics >> " +  this.favoriteMusics.size() );
+
 	}
 	
 	

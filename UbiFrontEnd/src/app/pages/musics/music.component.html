@@ -9,7 +9,7 @@
             <div class="col-md-3 text-center">
                     Name
             </div>
-            <div class="col-md-9 text-center">
+            <div class="col-md-7 text-center">
                     listenUrl
             </div>
     </div>  
@@ -17,9 +17,12 @@
             <div class="col-md-3 text-center">
                     {{music.name}}
             </div>
-            <div class="col-md-9 text-center">
+            <div class="col-md-7 text-center">
                     {{music.listenUrl}}
             </div>
+            <div class="col-md-2 text-center" (click)="deleteMusic(music.id);">
+                delete
+            </div>  
     </div>       
 </div>
         

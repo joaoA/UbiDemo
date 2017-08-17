@@ -2,6 +2,7 @@ package com.example.demo.model;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -24,11 +25,20 @@ public class Music {
 	
 	private String listenUrl;
 	
+	
+	public Music() {}
+	
+	public Music(String name, String downloadUrl, String listenUrl) {
+		this.name = name;
+		this.downloadUrl = downloadUrl;
+		this.listenUrl = listenUrl;
+	}
+
 	@ManyToOne
 	@JoinColumn(name = "albumId")
 	private Album album;
 		
-	@ManyToMany
+	@ManyToMany(cascade= CascadeType.ALL)
 	@JsonBackReference
 	private List<Person> users;
 

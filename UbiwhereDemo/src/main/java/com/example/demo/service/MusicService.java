@@ -13,7 +13,11 @@ public class MusicService {
 	
 	@Autowired
 	private MusicRepository musicRepo;
-
+	
+	public long count(){
+		return musicRepo.count();
+	}
+	
 	public List<Music> findAll(){
 	    List<Music> rs = new ArrayList<>();
 	    musicRepo.findAll().forEach(rs::add);

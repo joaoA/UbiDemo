@@ -29,4 +29,11 @@ export class MusicsComponent implements OnInit {
         this.router.navigate(["musics",i]);
     }
 
+
+    deleteMusic(id){
+        this.rs.delete("/musics/"+id).subscribe(
+            (done) => {
+                console.log("apagou");                
+          }, error => { console.log(error); });
+    }
 }
