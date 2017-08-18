@@ -27,10 +27,16 @@ public class MusicController {
 	
 	@Autowired
 	private PersonService personService;
-    
+	
+	/**
+	 * Returns music list ( all by default or filtered by user )
+	 * 
+	 * @param  userid	id of user   
+	 * @return      		music list
+	 */
 	@RequestMapping(method=RequestMethod.GET)
 	public List<Music> getMusics(@RequestParam(value = "userid", required=false) Long id) {
-		log.debug("[MusicController] getUsers");
+		log.debug("[MusicController] getMusics");
 			
 		if(id == null) 
 			return musicService.findAll();		
@@ -39,48 +45,70 @@ public class MusicController {
 
 	}
 	
+	/**
+	 * Returns a specific music info
+	 * 
+	 * @PathVariable  id		music id   
+	 * @return      			music
+	 */
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
-	public Music getUserById(@PathVariable("id") Long id) {
-		log.debug("[MusicController] getUserById");
+	public Music getMusicById(@PathVariable("id") Long id) {
+		log.debug("[MusicController] getMusicById");
 		
 		return musicService.findById(id);
 	}
 		
+	
+	/**
+	 * Add new music
+	 * 
+	 * @RequestBody  m		json music   
+	 * @return      			music id
+	 */
 	@RequestMapping(method=RequestMethod.POST)
-	public long addUser(@RequestBody Music p) {
-		log.debug("[MusicController] addUser");
-		if (musicService.save(p)!=null)
-			return p.getId();
+	public long addMusic(@RequestBody Music m) {
+		log.debug("[MusicController] addMusic");
+		if (musicService.save(m)!=null)
+			return m.getId();
 		
 		return -1;
 	}
 	
-		
+	/**
+	 * Update music
+	 * 
+	 * @PathVariable  id		music id 
+	 * @RequestBody   m		json music   
+	 * @return      			music id
+	 */	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
-	public long editUserById(@PathVariable("id") Long id, @RequestBody Music p) {
-		log.debug("[MusicController] editUserById");
+	public long editMusicById(@PathVariable("id") Long id, @RequestBody Music m) {
+		log.debug("[MusicController] editMusicById");
 		
-		if (musicService.update(p)!=null)
-			return p.getId();		
+		if (musicService.update(m)!=null)
+			return m.getId();		
 		return -1;
 	}
 	
+	/**
+	 * delete music
+	 * 
+	 * @PathVariable  id		music id
+	 * @return      			"done" ( if 200 ok )
+	 */
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
-	public String deleteUserById(@PathVariable("id") Long id) {
-		log.debug("[MusicController] deleteUserById");
+	public String deleteMusicById(@PathVariable("id") Long id) {
+		log.debug("[MusicController] deleteMusicById");
 		
 		Music m =  musicService.findById(id);
+		
 		if (m!= null) {
-			log.error("*************** user "+ personService.findAllByPersonId(m.getId()) +" updated ***********");
-			
 			personService.findAllByPersonId(m.getId()).forEach(user -> {
 				Person aux = personService.findById(user.getId());
 				List<Music> fav = aux.getFavoriteMusics();
-				log.error("*************** user fav musics "+ fav+" ***********");
 				fav.remove(m);
 				aux.setFavoriteMusics(fav);
 				personService.update(aux);
-				log.error("*************** user "+aux.getId() +" updated ***********");
 			});
 		}
 		musicService.deleteById(id);			

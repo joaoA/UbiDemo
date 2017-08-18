@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.model.Person;
 import com.example.demo.service.PersonService;
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,6 +23,11 @@ public class PersonController {
 	@Autowired
 	private PersonService personService;
 		
+	/**
+	 * Returns user list
+	 *    
+	 * @return      		user list
+	 */
 	@RequestMapping(method=RequestMethod.GET)
 	public List<Person> getUsers() {
 		log.debug("[PersonController] getUsers");
@@ -32,41 +35,57 @@ public class PersonController {
 		return personService.findAll();
 	}
 	
+	/**
+	 * Returns a specific user info
+	 * 
+	 * @PathVariable  id		user id   
+	 * @return      			user
+	 */
 	@RequestMapping(value="/{id}", method=RequestMethod.GET)
 	public Person getUserById(@PathVariable("id") Long id) {
 		log.debug("[PersonController] getUserById");
 		
 		return personService.findById(id);
 	}
-		
+	
+	/**
+	 * Add new user
+	 * 
+	 * @RequestBody  p		json user   
+	 * @return      			user id
+	 */
 	@RequestMapping(method=RequestMethod.POST)
 	public long addUser(@RequestBody Person p) throws JsonProcessingException {
 		log.debug("[PersonController] addUser");
-		
-		log.error("******************************");
-		log.error(new ObjectMapper().writeValueAsString(p));
-		log.error("******************************");
-		
-		
+	
 		if (personService.save(p)!=null)
 			return p.getId();
 		
 		return -1;
 	}
 	
+	/**
+	 * Update user
+	 * 
+	 * @PathVariable  id		user id 
+	 * @RequestBody   p		json user   
+	 * @return      			user id
+	 */	
 	@RequestMapping(value="/{id}", method=RequestMethod.PUT)
 	public long editUserById(@PathVariable("id") Long id, @RequestBody Person p) throws JsonProcessingException {
 		log.debug("[PersonController] editUserById");
-		
-		log.error("******************************");
-		log.error(new ObjectMapper().writeValueAsString(p));
-		log.error("******************************");
-		
+	
 		if (personService.update(p)!=null)
 			return p.getId();		
 		return -1;
 	}
 	
+	/**
+	 * delete user
+	 * 
+	 * @PathVariable  id		user id
+	 * @return      			"done" ( if 200 ok )
+	 */
 	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
 	public String deleteUserById(@PathVariable("id") Long id) {
 		log.debug("[PersonController] deleteUserById");
