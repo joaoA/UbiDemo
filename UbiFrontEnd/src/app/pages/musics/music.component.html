@@ -2,7 +2,7 @@
 <div class="content">        
         <div class="row">
                 <div class="col-md-12 text-center">
-                <h2>Music List</h2>
+                <h2 id="green">Music List</h2>
                 </div>
         </div> 
     
@@ -11,7 +11,8 @@
                         <tr>
                         <th>#</th>
                         <th>Name</th>
-                        <th>Listen Url </th>
+                        <th></th>
+                        <th></th>
                         <th></th>
                         </tr>
                 </thead>
@@ -19,10 +20,10 @@
                         <tr *ngFor="let music of musicList; let i = index" >
                         <th scope="row" (click)="goToMusic(music.id);">{{music.id}}</th>
                         <td (click)="goToMusic(music.id);">{{music.name}}</td>
-                        <td (click)="goToMusic(music.id);">{{music.listenUrl}}</td>
-                        <td (click)="deleteMusic(music.id);" >delete</td>
-                        </tr>
-                        
+                        <td><a class="btn btn-primary" href="{{music.listenUrl}}" role="button" target="_blank">Listen</a></td>
+                        <td><a class="btn btn-primary" href="{{music.downloadUrl}}" role="button" target="_blank">Download</a></td>
+                        <td (click)="deleteMusic(music.id);" ><a id="white" class="btn btn-primary" role="button">Delete</a></td>
+                        </tr>                        
                 </tbody>
         </table>
 </div>

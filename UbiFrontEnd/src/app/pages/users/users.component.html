@@ -1,7 +1,7 @@
 <div class="content">        
     <div class="row">
         <div class="col-md-12 text-center">
-            <h2>User List</h2>
+            <h2 id="green">User List</h2>
         </div>
     </div>    
     <!-- <div class="row" *ngFor="let user of userList; let i = index" (click)="goToUser(user.id);" >
@@ -28,7 +28,7 @@
                     <th scope="row" (click)="goToUser(user.id);" >{{user.id}}</th>
                     <td (click)="goToUser(user.id);" >{{user.name}}</td>
                     <td (click)="goToUser(user.id);">{{user.email}}</td>
-                    <td (click)="deleteUser(user.id);" >delete</td>
+                    <td (click)="deleteUser(user.id);" ><a id="white" class="btn btn-primary" role="button">Delete</a></td>
                     </tr>
                     
             </tbody>
