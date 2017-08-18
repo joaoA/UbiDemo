@@ -1,5 +1,5 @@
 export class Configuration {
-    private server: string = 'http://localhost:8080';
+    private server: string = 'https://evening-lake-70202.herokuapp.com';
     private apiUrl: string = '/api';
 
     getServerWithApiUrl(){
